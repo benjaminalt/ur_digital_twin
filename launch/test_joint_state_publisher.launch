@@ -1,0 +1,4 @@
+<launch>
+    <include file="$(find ur_gazebo)/launch/ur5.launch"/>
+    <node pkg="ur_digital_twin" name="joint_state_publisher" type="joint_state_publisher.py"/>
+</launch>
