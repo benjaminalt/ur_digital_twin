@@ -1,0 +1,12 @@
+ok = socket_open("192.168.178.21", 3333, "ft_socket")
+
+if not ok:
+    textmsg("Could not open ft_socket")
+    halt
+end
+
+while True:
+    res = socket_read_ascii_float(6, "ft_socket")
+    textmsg(res)
+    sync()
+end
