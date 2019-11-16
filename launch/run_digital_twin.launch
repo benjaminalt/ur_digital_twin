@@ -1,10 +1,14 @@
 <launch>
-    <include file="$(find ur_gazebo)/launch/ur5.launch"/>
+    <include file="$(find ur_digital_twin)/launch/setup_gazebo.launch">
+        <arg name="world_name" value="worlds/table_experiment.world"/>
+        <arg name="gui" value="true"/>
+        <env name="GAZEBO_RESOURCE_PATH" value="$(find ur_digital_twin)"/>
+    </include>
     <param name="ursim_rtde_config" value="$(find ur_digital_twin)/config/rtde_configuration.xml" type="str"/>
     <param name="ursim_host" value="172.16.129.128" type="str"/>
     <param name="ursim_port" value="30004" type="int"/>
     <param name="sampling_interval" value="0.008" type="double"/>
     <node pkg="ur_digital_twin" name="joint_state_publisher" type="joint_state_publisher.py"/>
     <param name="ft_socket_port" value="3333" type="int"/>
-    <node pkg="ur_digital_twin" name="ft_subscriber" type="ft_subscriber.py"/>
+    <!-- <node pkg="ur_digital_twin" name="ft_subscriber" type="ft_subscriber.py"/> -->
 </launch>
