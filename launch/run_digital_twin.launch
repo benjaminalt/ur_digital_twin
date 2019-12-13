@@ -10,5 +10,5 @@
     <param name="sampling_interval" value="0.008" type="double"/>
     <node pkg="ur_digital_twin" name="joint_state_publisher" type="joint_state_publisher.py"/>
     <param name="ft_socket_port" value="3333" type="int"/>
-    <!-- <node pkg="ur_digital_twin" name="ft_subscriber" type="ft_subscriber.py"/> -->
+    <node pkg="ur_digital_twin" name="ft_subscriber" type="ft_subscriber.py"/>
 </launch>

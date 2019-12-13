@@ -1,20 +1,18 @@
-def prog():
+{{ft_sensor}}
+
+def main():
+
     pi = 3.14159
     home_pos = [0, -pi/2, -pi/2, -pi/2, pi/2, 0]
     movej(home_pos)
     
-    ok = socket_open("192.168.178.21", 3333, "ft_socket")
-
-    if not ok:
-        textmsg("Could not open ft_socket")
-        halt
-    end
-
-    while True:
-        res = socket_read_ascii_float(6, "ft_socket")
-        textmsg(res)
-        sync()
-    end
+    ft_thread = run ft_reader()
+    count = 0
+    while count < 100:
+        textmsg(g_g_current_ft)
+        count += 1
+    global g_ft_reader_stop = True
+    join ft_thread
 end
 
-prog()
+main()

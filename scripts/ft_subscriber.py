@@ -26,7 +26,7 @@ def main():
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
     s.bind(("192.168.178.21", port)) 
-    s.listen(5) 
+    s.listen(5)
     c, _ = s.accept() 
     rospy.Subscriber("ee_forces_torques", WrenchStamped, partial(on_ft_received, connection=c))
     rospy.on_shutdown(partial(close_socket, s))
