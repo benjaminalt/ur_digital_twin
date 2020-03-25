@@ -3,7 +3,7 @@
 def main():
 
     pi = 3.14159
-    home_pos = [0, -pi/2, -pi/2, -pi/2, pi/2, 0]
+    home_pos = [0, 0, 0, 0, 0, 0]
     movej(home_pos)
     
     ft_thread = run ft_reader()

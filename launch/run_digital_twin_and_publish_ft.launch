@@ -1,0 +1,5 @@
+<launch>
+    <include file="$(find ur_digital_twin)/launch/run_digital_twin.launch"/>
+    <param name="ft_socket_port" value="3333" type="int"/>
+    <node pkg="ur_digital_twin" name="ft_subscriber" type="ft_subscriber.py"/>
+</launch>

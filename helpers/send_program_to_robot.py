@@ -4,6 +4,7 @@ import socket
 
 urscript_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir, "urscript")
 
+
 def preprocess(code):
     preprocessed_code = ""
     for line in code.splitlines():
@@ -12,13 +13,14 @@ def preprocess(code):
             script_filename = script_id + ".script"
             if not script_filename in os.listdir(urscript_dir):
                 raise RuntimeError("Invalid script substitution: {} not found".format(script_filename))
-            with open(os.path.join(urscript_dir,  script_filename)) as script_file:
+            with open(os.path.join(urscript_dir, script_filename)) as script_file:
                 script_code = script_file.read()
                 processed_script = preprocess(script_code)
                 preprocessed_code += processed_script + "\n"
         else:
             preprocessed_code += line + "\n"
     return preprocessed_code
+
 
 def main(args):
     if not os.path.exists(args.program_path) or not os.path.isfile(args.program_path):
@@ -29,6 +31,7 @@ def main(args):
         program_code = preprocess(program_file.read())
         s.sendall(program_code)
     s.close()
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
