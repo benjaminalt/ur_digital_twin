@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+"""
+Publish the current joint state of the URSim simulator to /joint_group_position_controller/command
+"""
+
 import rospy
 from std_msgs.msg import Float64MultiArray
 from controller_manager_msgs.srv import SwitchController, SwitchControllerRequest, ListControllers, ListControllersRequest
@@ -27,7 +31,7 @@ def switch_to_position_controller():
 
 
 def main():
-    node_name = "joint_state_publisher"
+    node_name = "ur_joint_command_publisher"
     rospy.loginfo("{} starting".format(node_name))
     rospy.init_node(node_name, anonymous=False)
 
@@ -37,18 +41,16 @@ def main():
     sampling_interval = rospy.get_param("sampling_interval")
     rate = rospy.Rate(1/sampling_interval)
 
-    try:
-        switch_to_position_controller()
-        pub = rospy.Publisher("/joint_group_position_controller/command", Float64MultiArray, queue_size=10)
-        with URJointStateReader(config_file, host, port, sampling_interval) as joint_state_reader:
-            while not rospy.is_shutdown():
-                current_state = joint_state_reader.receive(False)
-                state = Float64MultiArray()
-                state.data = current_state.actual_q
-                pub.publish(state)
-                rate.sleep()
-    except rospy.exceptions.ROSInterruptException:
-        return
+    switch_to_position_controller()
+    pub = rospy.Publisher("/joint_group_position_controller/command", Float64MultiArray, queue_size=10)
+    with URJointStateReader(config_file, host, port, sampling_interval) as joint_state_reader:
+        while not rospy.is_shutdown():
+            current_state = joint_state_reader.receive(False)
+            state = Float64MultiArray()
+            state.data = current_state.actual_q
+            pub.publish(state)
+            rate.sleep()
+
 
 if __name__ == "__main__":
     main()

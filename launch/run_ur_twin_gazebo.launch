@@ -1,0 +1,17 @@
+<launch>
+    <include file="$(find ur_digital_twin)/launch/setup_gazebo.launch">
+        <arg name="world_name" value="worlds/table_experiment.world"/>
+        <arg name="gui" value="true"/>
+        <env name="GAZEBO_RESOURCE_PATH" value="$(find ur_digital_twin)"/>
+    </include>
+    <arg name="ursim_host"/>
+    <arg name="ursim_port" default="30004"/>
+    <arg name="sampling_interval" default="0.008"/>
+
+    <param name="ursim_rtde_config" value="$(find ur_digital_twin)/config/rtde_configuration.xml" type="str"/>
+    <param name="ursim_host" value="$(arg ursim_host)" type="str"/>
+    <param name="ursim_port" value="$(arg ursim_port)" type="int"/>
+    <param name="sampling_interval" value="$(arg sampling_interval)" type="double"/>
+
+    <node pkg="ur_digital_twin" name="ur_joint_command_publisher" type="ur_joint_command_publisher.py" output="screen"/>
+</launch>

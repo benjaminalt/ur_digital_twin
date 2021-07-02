@@ -4,5 +4,6 @@
 		<field name="timestamp" type="DOUBLE"/>
 		<field name="target_q" type="VECTOR6D"/>
 		<field name="actual_q" type="VECTOR6D"/>
+		<field name="actual_qd" type="VECTOR6D"/>
 	</recipe>
 </rtde_config>

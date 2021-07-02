@@ -3,6 +3,7 @@
 from rtde import rtde
 import rtde.rtde_config as rtde_config
 
+
 class URJointStateReader(object):
     def __init__(self, config_file, host, port, sampling_interval=0.008):
         self.config_file = config_file
