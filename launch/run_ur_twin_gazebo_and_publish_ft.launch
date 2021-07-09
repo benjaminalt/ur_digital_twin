@@ -1,5 +1,7 @@
 <launch>
     <include file="ur_twin_gazebo.launch"/>
-    <param name="ft_socket_port" value="3333" type="int"/>
-    <node pkg="ur_digital_twin" name="ft_subscriber" type="ft_subscriber.py"/>
+    <node pkg="ur_digital_twin" name="ft_subscriber_publisher" type="ft_subscriber_publisher.py">
+        <param name="ft_socket_port" value="3334" type="int"/>
+        <param name="ft_topic" value="/ee_forces_torques" type="str"/>
+    </node>
 </launch>

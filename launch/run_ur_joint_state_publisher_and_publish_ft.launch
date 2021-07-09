@@ -1,0 +1,7 @@
+<launch>
+    <include file="$(find ur_digital_twin)/launch/run_ur_joint_state_publisher.launch"/>
+    <node pkg="ur_digital_twin" name="ft_subscriber_publisher" type="ft_subscriber_publisher.py" output="screen">
+        <param name="ft_socket_port" value="3334" type="int"/>
+        <param name="ft_topic" value="/pycram/fts" type="str"/>
+    </node>
+</launch>
